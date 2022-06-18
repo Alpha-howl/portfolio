@@ -17,10 +17,12 @@ html {
 }
 
 :root {
-    --clr-background-main: #1d1d1d;
+    --clr-background-main: #000;
     --clr-hover: #05fdd8;
-    --clr-accent: rgb(255, 134, 193);
+    --clr-accent: rgb(134, 182, 255);
+    /*rgb(255, 134, 193);*/
     --clr-text-content: white;
+    --clr-text-weak: #666;
 }
 
 #content {
@@ -49,13 +51,11 @@ html {
     justify-content: center;
     place-items: center;
     font-size: 3rem;
+    text-shadow: 1px 1px 3px var(--clr-accent), -1px 1px 3px var(--clr-accent), 1px -1px 3px var(--clr-accent), -1px -1px 3px var(--clr-accent);
     cursor: pointer;
     transition: text-shadow 80ms ease;
 }
 
-#logo:hover {
-    text-shadow: 1px 1px 3px var(--clr-accent), -1px 1px 3px var(--clr-accent), 1px -1px 3px var(--clr-accent), -1px -1px 3px var(--clr-accent);
-}
 
 #header>#title {
     font-size: 2.2rem;
@@ -89,7 +89,6 @@ html {
 
 #navbar {
     grid-area: navbar;
-    background-color: rgba(0, 0, 0, .1);
 }
 
 .icon>svg {
@@ -111,6 +110,7 @@ html {
 }
 
 #main-screen {
+    transition: opacity 150ms ease, transform 150ms ease;
     grid-area: screen;
 }
 
@@ -120,4 +120,49 @@ html {
 
 html {
     background-color: var(--clr-background-main);
+}
+
+.content-title {
+    font-size: 3rem;
+}
+
+.main {
+    color: var(--clr-text-content);
+}
+
+.accent {
+    color: var(--clr-accent);
+}
+
+.weak {
+    color: var(--clr-text-weak);
+}
+
+.weak2 {
+    opacity: .5;
+}
+
+.large {
+    font-size: 1.8rem;
+}
+
+.fade-out {
+    opacity: 0;
+    transform: translateY(50%);
+}
+
+.tilt {
+    transform: rotateZ(10deg);
+    transform-origin: center;
+    animation: fix-tilt 500ms 2500ms forwards;
+}
+
+@keyframes fix-tilt {
+    from {
+        transform: rotateZ(10deg)
+    }
+
+    to {
+        transform: rotateZ(0deg)
+    }
 }

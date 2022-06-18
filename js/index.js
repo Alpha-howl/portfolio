@@ -48,6 +48,8 @@ function iconPress(iconName) {
 
 function loadInContent() {
     document.getElementById("content").style.opacity = 1;
+    const template = document.getElementById("main-content-template");
+    setMainScreenContent(template.querySelector("#home"));
 }
 
 
@@ -57,8 +59,31 @@ importAll();
 
 
 
+function sleep(ms) {
+    return new Promise(done => {
+        setTimeout(done, ms);
+    });
+}
+
+
+const mainScreen = document.getElementById("main-screen");
+
+async function setMainScreenContent(contentWrapperElmnt) {
+    console.log(contentWrapperElmnt);
+    mainScreen.classList.add("fade-out");
+    await sleep(300);
+    mainScreen.innerHTML = contentWrapperElmnt.innerHTML;
+    mainScreen.classList.remove("fade-out");
+}
+
+
+
+
+
+
+
 
 
 document.getElementById("logo").addEventListener("click", () => {
-    document.documentElement.style.setProperty("--clr-accent", "rgb(134, 182, 255)");
+    document.documentElement.style.setProperty("--clr-accent", "rgb(255, 134, 193)");
 });
