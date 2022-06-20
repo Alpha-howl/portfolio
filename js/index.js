@@ -1,6 +1,10 @@
 
-const styles = ["css/style.css"];
+const styles = ["css/style.css", "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"];
 const scripts = [];
+const svgs = ["outline", "about", "skills"];
+
+
+const templateHtmls = {};
 
 function importAll() {
     // import needed modules
@@ -14,7 +18,33 @@ function importAll() {
         document.head.appendChild(link);
     });
 
+    scripts.forEach((src, index) => {
+        const script = document.createElement("script");
+        script.addEventListener("load", () => {
+            moduleLoaded(styles.length + index + 1);
+        });
+        script.setAttribute("src", src);
+        document.head.appendChild(script);
+    });
 
+    svgs.forEach((svgName, index) => {
+        const path = svgName + ".txt";
+        fetch("resources/" + path)
+            .then(resp => resp.blob() )
+            .then(blob => blob.text() )
+            .then(text => {
+                document.getElementById(svgName).innerHTML = text;
+                moduleLoaded(index + styles.length + scripts.length + 1);
+            });
+
+        fetch("resources/" + svgName + "html.txt")
+            .then(resp => resp.blob() )
+            .then(blob => blob.text() )
+            .then(text => {
+                templateHtmls[svgName] = text;
+                moduleLoaded(index + svgs.length + styles.length + scripts.length + 1);
+            });
+    });
 }
 
 
@@ -22,9 +52,13 @@ const loadedModules = [];
 let allModulesLoaded = false;
 
 // Work out the expected sumation of the number of modules
-const expectedSumation = (scripts.length + styles.length + 1) / 2 * (scripts.length + styles.length);
+// I'm using sumation to make sure that not only the correct number of modules
+// are loaded, but also that the correct ones are loaded - eg not that one is loaded twice
+const totalModules = scripts.length + svgs.length*2 + styles.length;
+const expectedSumation = (totalModules + 1) / 2 * totalModules;
+
+const progressBar = document.getElementById("progress");
 function moduleLoaded(moduleNumber) {
-    console.log("Module", moduleNumber, "has loaded");
     loadedModules.push(moduleNumber);
 
     // if all modules loaded, remove loading screen
@@ -34,10 +68,14 @@ function moduleLoaded(moduleNumber) {
         },
         0
     );
+
+    const prog = loadedModules.length/totalModules;
+    progressBar.style.setProperty("--prog", prog);
+
     if(expectedSumation === modSumation) {
         // All required modules have loaded
         const allModulesLoaded = true;
-        loadInContent();
+        setTimeout(loadInContent, 750);
     }
 }
 
@@ -46,12 +84,28 @@ function iconPress(iconName) {
     history.pushState(undefined, iconName, iconName);
 }
 
-function loadInContent() {
-    document.getElementById("content").style.opacity = 1;
+
+
+
+
+
+const loader = document.getElementById("loader");
+const content = document.getElementById("content");
+async function loadInContent() {
+    loader.style.opacity = 0;
+    await sleep(350);
+    loader.style.display = "none";
+    content.style.opacity = 1;
     const template = document.getElementById("main-content-template");
-    setMainScreenContent(template.querySelector("#home"));
+
+    const currentHistoryState = location.pathname.split("\/").splice(-1)[0] || "outline";
+    setMainScreenContent(templateHtmls[currentHistoryState] || "Error 404");
 }
 
+
+document.addEventListener("popstate", e => {
+    console.log(e);
+});
 
 
 
@@ -68,11 +122,10 @@ function sleep(ms) {
 
 const mainScreen = document.getElementById("main-screen");
 
-async function setMainScreenContent(contentWrapperElmnt) {
-    console.log(contentWrapperElmnt);
+async function setMainScreenContent(innerHTML) {
     mainScreen.classList.add("fade-out");
     await sleep(300);
-    mainScreen.innerHTML = contentWrapperElmnt.innerHTML;
+    mainScreen.innerHTML = innerHTML;
     mainScreen.classList.remove("fade-out");
 }
 
@@ -85,5 +138,5 @@ async function setMainScreenContent(contentWrapperElmnt) {
 
 
 document.getElementById("logo").addEventListener("click", () => {
-    document.documentElement.style.setProperty("--clr-accent", "rgb(255, 134, 193)");
+    document.documentElement.style.setProperty("--clr-accent", "rgb(134, 182, 255)");
 });
