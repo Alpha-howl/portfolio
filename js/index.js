@@ -74,23 +74,23 @@ function moduleLoaded(moduleNumber) {
 
     if(expectedSumation === modSumation) {
         // All required modules have loaded
-        const allModulesLoaded = true;
         setTimeout(loadInContent, 750);
     }
 }
 
 
 function iconPress(iconName) {
-    history.pushState(undefined, iconName, iconName);
-    console.log(iconName);
+    history.pushState(iconName, iconName, iconName);
     setMainScreenContent(templateHtmls[iconName]);
 }
 
+document.addEventListener("popstate", e => {
+    console.log(e);
+});
 
 
 
 
-let loadedAllModules = false;
 const loader = document.getElementById("loader");
 const content = document.getElementById("content");
 async function loadInContent() {
@@ -102,13 +102,8 @@ async function loadInContent() {
 
     const currentHistoryState = location.pathname.split("\/").splice(-1)[0] || "outline";
     setMainScreenContent(templateHtmls[currentHistoryState] || "Error 404");
-    loadedAllModules = true;
+    allModulesLoaded = true;
 }
-
-document.addEventListener("popstate", e => {
-    console.log(e);
-});
-
 
 
 importAll();
