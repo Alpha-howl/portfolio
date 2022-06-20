@@ -82,13 +82,14 @@ function moduleLoaded(moduleNumber) {
 
 function iconPress(iconName) {
     history.pushState(undefined, iconName, iconName);
+    setMainScreenContent(templateHtmls[iconName]);
 }
 
 
 
 
 
-
+let loadedAllModules = false;
 const loader = document.getElementById("loader");
 const content = document.getElementById("content");
 async function loadInContent() {
@@ -100,8 +101,8 @@ async function loadInContent() {
 
     const currentHistoryState = location.pathname.split("\/").splice(-1)[0] || "outline";
     setMainScreenContent(templateHtmls[currentHistoryState] || "Error 404");
+    loadedAllModules = true;
 }
-
 
 document.addEventListener("popstate", e => {
     console.log(e);

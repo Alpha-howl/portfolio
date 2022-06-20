@@ -7,7 +7,7 @@
 
         </h1>
 
-        <span class="weak2 handwrite comp-only" style="margin-top: 6rem;">
+        <span class="weak handwrite comp-only" style="margin-top: 6rem;">
             &lt;outline&gt;
         </span>
 
@@ -21,7 +21,7 @@
             </p>
         </div>
 
-        <span class=" handwrite comp-only" style="margin-top: 5rem;">
+        <span class="weak handwrite comp-only" style="margin-top: 5rem;">
             &lt;/outline&gt;
         </span>
     </div>
