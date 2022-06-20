@@ -81,11 +81,17 @@ function moduleLoaded(moduleNumber) {
 
 function iconPress(iconName) {
     history.pushState(iconName, iconName, iconName);
-    setMainScreenContent(templateHtmls[iconName]);
+    const event = new Event("popstate");
+    e.target = iconName;
+    document.dispatchEvent(event);    
 }
 
 document.addEventListener("popstate", e => {
     console.log(e);
+
+    const iconName = e.target;
+    console.log(iconName);
+    setMainScreenContent(templateHtmls[iconName]);
 });
 
 
