@@ -82,6 +82,7 @@ function moduleLoaded(moduleNumber) {
 
 function iconPress(iconName) {
     history.pushState(undefined, iconName, iconName);
+    console.log(iconName);
     setMainScreenContent(templateHtmls[iconName]);
 }
 
