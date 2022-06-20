@@ -94,7 +94,7 @@ document.addEventListener("popstate", e => {
     setMainScreenContent(templateHtmls[iconName]);
 });
 
-
+console.log(5050);
 
 
 const loader = document.getElementById("loader");
