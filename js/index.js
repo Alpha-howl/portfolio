@@ -80,6 +80,7 @@ function moduleLoaded(moduleNumber) {
 
 
 function iconPress(iconName) {
+    alert("Hi, I'm working on this. In the meantime, please contact me: alex.v.voynov@gmail.com");
     //history.pushState(iconName, iconName, iconName);
     const event = new Event("popstate");
     e.target = iconName; // todo - change target here
