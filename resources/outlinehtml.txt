@@ -13,11 +13,11 @@
 
         <div style="margin-left: 2rem;" class="animate__animated animate__bounceInLeft">
             <p class="main large">
-                A creative <span class="accent">front-end</span> engineer...
+                A creative, passionate <span class="accent">front-end</span> engineer...
             </p>
 
             <p class="main large">
-                ... and a <span class="accent">full</span> developer
+                ... and a <span class="accent">full stack</span> developer
             </p>
         </div>
 
