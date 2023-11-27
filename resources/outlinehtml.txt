@@ -17,7 +17,7 @@
             </p>
 
             <p class="main large">
-                ... and a <span class="accent">full stack</span> developer
+                ... and a <span class="accent">full stack</span> developer behind the scenes
             </p>
         </div>
 
