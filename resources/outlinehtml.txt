@@ -17,7 +17,7 @@
             </p>
 
             <p class="main large">
-                ... and a <strike class="weak">full</strike> <span class="accent">3/4 stack</span> developer
+                ... and a <span class="accent">full</span> developer
             </p>
         </div>
 
