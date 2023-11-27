@@ -81,6 +81,7 @@ function moduleLoaded(moduleNumber) {
 
 function iconPress(iconName) {
     //history.pushState(iconName, iconName, iconName);
+    alert(50);
     const event = new Event("popstate");
     e.target = iconName; // todo - change target here
     document.dispatchEvent(event);    
